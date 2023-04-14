@@ -1,10 +1,15 @@
-package com.groupware.account;
+package com.groupware.account.view;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.groupware.account.controller.AccountDao;
+import com.groupware.account.controller.AccountDaoImpl;
+import com.groupware.account.model.AccountModel;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;

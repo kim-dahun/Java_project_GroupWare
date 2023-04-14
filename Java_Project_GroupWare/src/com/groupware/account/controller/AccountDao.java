@@ -1,4 +1,6 @@
-package com.groupware.account;
+package com.groupware.account.controller;
+
+import com.groupware.account.model.AccountModel;
 
 public interface AccountDao {
 	// InterFace

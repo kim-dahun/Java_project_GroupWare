@@ -1,4 +1,4 @@
-package com.groupware.account;
+package com.groupware.account.view;
 
 import java.awt.EventQueue;
 
@@ -16,14 +16,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class SignInUI {
 
 	private JFrame frmDh;
 	private JTextField textId;
-	private JTextField textPassword;
-	private JButton btnSignIn;
-	private JButton btnLogIn;
+	private JTextField textPW;
 
 	/**
 	 * Launch the application.
@@ -54,32 +55,17 @@ public class SignInUI {
 	private void initialize() {
 		frmDh = new JFrame();
 		frmDh.setTitle("Co-work tool");
-		frmDh.setBounds(100, 100, 272, 361);
+		frmDh.setBounds(100, 100, 808, 735);
 		frmDh.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDh.getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		frmDh.getContentPane().add(panel, BorderLayout.SOUTH);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		btnSignIn = new JButton("회원가입");
-		btnSignIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				handleclickbtn();
-				
-			}
-		});
-		panel.add(btnSignIn);
-		
-		btnLogIn = new JButton("로그인");
-		panel.add(btnLogIn);
 		
 		JPanel panel_1 = new JPanel();
 		frmDh.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
 		
 		textId = new JTextField();
+		textId.setForeground(SystemColor.desktop);
+		textId.setBackground(SystemColor.control);
 		textId.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -90,48 +76,28 @@ public class SignInUI {
 		
 		textId.setHorizontalAlignment(SwingConstants.CENTER);
 		textId.setText("ID를 입력하세요");
-		textId.setBounds(97, 105, 128, 21);
+		textId.setBounds(80, 191, 643, 98);
 		panel_1.add(textId);
 		textId.setColumns(10);
-		
-		textPassword = new JTextField();
-		textPassword.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				textPassword.setText("");
-			}
-		});
-		
-		textPassword.setText("PW를 입력하세요");
-		textPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		textPassword.setColumns(10);
-		textPassword.setBounds(97, 154, 128, 21);
-		panel_1.add(textPassword);
-		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setBounds(12, 157, 73, 15);
-		panel_1.add(lblPassword);
-		
-		JLabel lblId = new JLabel("ID");
-		lblId.setHorizontalAlignment(SwingConstants.CENTER);
-		lblId.setBounds(12, 108, 73, 15);
-		panel_1.add(lblId);
 		
 		JLabel lblTitle = new JLabel("상상기업 그룹웨어");
 		lblTitle.setFont(new Font("D2Coding", Font.PLAIN, 25));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(12, 10, 232, 44);
+		lblTitle.setBounds(12, 29, 786, 45);
 		panel_1.add(lblTitle);
-	}
-
-	
-
-	protected void handleclickbtn() {
-		// TODO Auto-generated method stub
 		
-		SignInUI_PopUp.showMySignInPopup();
+		textPW = new JTextField();
+		textPW.setText("비밀번호를 입력하세요");
+		textPW.setHorizontalAlignment(SwingConstants.CENTER);
+		textPW.setForeground(Color.BLACK);
+		textPW.setColumns(10);
+		textPW.setBackground(SystemColor.menu);
+		textPW.setBounds(80, 319, 643, 98);
+		panel_1.add(textPW);
 		
+		JLabel lblbackground = new JLabel("New label");
+		lblbackground.setIcon(new ImageIcon("C:\\java_project\\Java_project_GroupWare\\Java_Project_GroupWare\\img\\login.png"));
+		lblbackground.setBounds(0, -11, 822, 725);
+		panel_1.add(lblbackground);
 	}
 }

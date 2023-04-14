@@ -1,4 +1,4 @@
-package com.groupware.account;
+package com.groupware.account.model;
 
 public class AdminAccountModel extends AccountModel {
 

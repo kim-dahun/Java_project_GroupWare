@@ -1,7 +1,9 @@
-package com.groupware.account;
+package com.groupware.account.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.groupware.account.model.AccountModel;
 
 public class AccountDaoImpl implements AccountDao {
 	// 구현 클래스
@@ -84,5 +86,7 @@ public class AccountDaoImpl implements AccountDao {
 
 		return accountList;
 	}
+
+	
 
 }
