@@ -19,12 +19,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Color;
+import javax.swing.JCheckBox;
 
 public class SignInUI {
 
 	private JFrame frmDh;
 	private JTextField textId;
-	private JTextField textPW;
+	private JTextField textpw;
 
 	/**
 	 * Launch the application.
@@ -81,22 +82,51 @@ public class SignInUI {
 		textId.setColumns(10);
 		
 		JLabel lblTitle = new JLabel("상상기업 그룹웨어");
-		lblTitle.setFont(new Font("D2Coding", Font.PLAIN, 25));
+		lblTitle.setFont(new Font("D2Coding", Font.BOLD, 40));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(12, 29, 786, 45);
+		lblTitle.setBounds(12, 10, 786, 64);
 		panel_1.add(lblTitle);
 		
-		textPW = new JTextField();
-		textPW.setText("비밀번호를 입력하세요");
-		textPW.setHorizontalAlignment(SwingConstants.CENTER);
-		textPW.setForeground(Color.BLACK);
-		textPW.setColumns(10);
-		textPW.setBackground(SystemColor.menu);
-		textPW.setBounds(80, 319, 643, 98);
-		panel_1.add(textPW);
+		textpw = new JTextField();
+		
+		textpw.setForeground(SystemColor.desktop);
+		textpw.setBackground(SystemColor.control);
+		textpw.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textpw.setText("");
+				
+			}
+		});
+		
+		textpw.setText("비밀번호를 입력하세요");
+		textpw.setHorizontalAlignment(SwingConstants.CENTER);
+		textpw.setForeground(Color.BLACK);
+		textpw.setColumns(10);
+		textpw.setBackground(SystemColor.menu);
+		textpw.setBounds(80, 314, 643, 98);
+		panel_1.add(textpw);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("     ID 저장");
+		chckbxNewCheckBox.setFont(new Font("D2Coding", Font.PLAIN, 22));
+		chckbxNewCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
+		chckbxNewCheckBox.setBounds(80, 442, 247, 50);
+		panel_1.add(chckbxNewCheckBox);
+		
+		JLabel lblLogin = new JLabel("New label");
+		lblLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				SignInUI_PopUp.showMySignInPopup();
+				
+			}
+		});
+		lblLogin.setBounds(80, 525, 643, 98);
+		panel_1.add(lblLogin);
 		
 		JLabel lblbackground = new JLabel("New label");
-		lblbackground.setIcon(new ImageIcon("C:\\java_project\\Java_project_GroupWare\\Java_Project_GroupWare\\img\\login.png"));
+		lblbackground.setIcon(new ImageIcon("C:\\Users\\user1\\Documents\\GitHub\\Java_project_GroupWare\\Java_Project_GroupWare\\img\\login.png"));
 		lblbackground.setBounds(0, -11, 822, 725);
 		panel_1.add(lblbackground);
 	}
