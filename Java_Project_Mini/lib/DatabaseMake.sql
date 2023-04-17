@@ -30,4 +30,4 @@ modify
 isadmin check (isadmin in ('false','true'));
 
 
-CREATE TABLE DEPT (deptno number(3), deptName varchar2(100 char), deptref number(3));
+CREATE TABLE deptlist (deptno number(3), deptName varchar2(100 char), deptref number(3));
