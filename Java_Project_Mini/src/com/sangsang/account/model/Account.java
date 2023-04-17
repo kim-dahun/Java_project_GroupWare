@@ -141,6 +141,17 @@ public abstract class Account {
 		this.positionName = positionName;
 	}
 
+	
+	
+	
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

@@ -39,8 +39,8 @@ public class AccountDaoImpl implements AccountDao {
 		public static final String SqlReadEach = String.format("SELECT * FROM %s WHERE %s = ?" , TBL_NAME,
 				COL_ID);
 		public static final String SqlWrite = String.format(
-				"INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-				TBL_NAME, COL_ID, COL_PW, COL_NAME, COL_PHONE, COL_EMAIL, COL_DEPTNO, COL_DEPTNAME);
+				"INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+				TBL_NAME, COL_ID, COL_PW, COL_NAME, COL_PHONE, COL_EMAIL, COL_DEPTNO, COL_DEPTNAME, COL_ISADMIN);
 		public static final String SqlDelete = String.format("DELETE FROM %s WHERE ID = ?", TBL_NAME);
 		public static final String SqlModifyAdmin = String.format(
 				"UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
@@ -113,7 +113,7 @@ public class AccountDaoImpl implements AccountDao {
 				String empno = rs.getString(COL_EMPNO);
 				int deptno = rs.getInt(COL_DEPTNO);
 				String deptName = rs.getString(COL_DEPTNAME);
-				boolean isAdmin = rs.getBoolean(COL_ISADMIN);
+				int isAdmin = rs.getString(COL_ISADMIN).equals("true") ? 1 : 0;
 
 				user = new AccountLocalUser(eid, id, pw, name, phone, email, deptno, deptName, empno,
 						posNo, posName);
@@ -166,11 +166,11 @@ public class AccountDaoImpl implements AccountDao {
 				String empno = rs.getString(COL_EMPNO);
 				int deptno = rs.getInt(COL_DEPTNO);
 				String deptName = rs.getString(COL_DEPTNAME);
-				int isAdmin = rs.getString(COL_ISADMIN)=="true" ? 1 : 0;
+				int isAdmin = rs.getString(COL_ISADMIN).equals("true") ? 1 : 0;
 
 				AccountLocalUser user = new AccountLocalUser(eid, id, pw, name, phone, email, deptno, deptName, empno,
 						posNo, posName);
-
+				
 				acclist.add(user);
 
 			}
@@ -211,6 +211,8 @@ public class AccountDaoImpl implements AccountDao {
 			stmt.setString(5, account.getEmail());
 			stmt.setInt(6, account.getDeptNo());
 			stmt.setString(7, account.getDeptName());
+			String isadmin = account.getIsAdmin() == 1 ? "true" : "false";
+			stmt.setString(8,isadmin);
 
 			result = stmt.executeUpdate();
 
@@ -340,7 +342,7 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public String findId(String name, int empno) {
+	public String findId(String name, String empno) {
 		// TODO Auto-generated method stub
 		acclist = read();
 
@@ -364,7 +366,7 @@ public class AccountDaoImpl implements AccountDao {
 
 		for (Account acc : acclist) {
 
-			if (acc.getId().equals(id) && acc.getEmail() == email) {
+			if (acc.getId().equals(id) && acc.getEmail().equals(email)) {
 
 				return acc.getPw();
 

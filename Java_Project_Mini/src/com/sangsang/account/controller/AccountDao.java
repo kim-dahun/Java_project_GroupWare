@@ -17,7 +17,7 @@ public interface AccountDao {
 	
 	int ModifiedAcc(Account account); // 관리자가 사번이나 직급을 부여할 때 사용
 	
-	String findId(String name, int empno); // ID를 확인함
+	String findId(String name, String empno); // ID를 확인함
 	
 	String findPw(String id, String email); // 비밀번호를 확인함.
 	
