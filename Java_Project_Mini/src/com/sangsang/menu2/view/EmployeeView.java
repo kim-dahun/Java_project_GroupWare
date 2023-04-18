@@ -17,6 +17,9 @@ public class EmployeeView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JButton btnSearchAccount;
+	private JButton btnModifiedAccount;
+	private JButton btnDeleteAccount;
 
 	/**
 	 * Launch the application.
@@ -65,17 +68,17 @@ public class EmployeeView extends JFrame {
 		lblNewLabel_1.setBounds(12, 371, 581, 15);
 		contentPane.add(lblNewLabel_1);
 		
-		JButton btnDeleteAccount = new JButton("사원 삭제");
+		btnDeleteAccount = new JButton("사원 삭제");
 		btnDeleteAccount.setFont(new Font("D2Coding", Font.PLAIN, 12));
 		btnDeleteAccount.setBounds(451, 74, 142, 33);
 		contentPane.add(btnDeleteAccount);
 		
-		JButton btnSearchAccount = new JButton("사원 검색");
+		btnSearchAccount = new JButton("사원 검색");
 		btnSearchAccount.setFont(new Font("D2Coding", Font.PLAIN, 12));
 		btnSearchAccount.setBounds(229, 74, 142, 33);
 		contentPane.add(btnSearchAccount);
 		
-		JButton btnModifiedAccount = new JButton("사원 수정");
+		btnModifiedAccount = new JButton("사원 수정");
 		btnModifiedAccount.setFont(new Font("D2Coding", Font.PLAIN, 12));
 		btnModifiedAccount.setBounds(12, 74, 142, 33);
 		contentPane.add(btnModifiedAccount);

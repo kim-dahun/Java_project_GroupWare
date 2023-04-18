@@ -72,15 +72,15 @@ public class AccountLoginUi {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		AccountAdmin admin = new AccountAdmin();
 		Account adminchecker = dao.read(admin.getId());
-		if (adminchecker==null) {
+		if (adminchecker == null) {
 
 			dao.writeAcc(admin);
-			
+
 		}
-		
+
 		frame = new JFrame();
 		frame.setTitle("로그인 화면");
 		frame.setBounds(100, 100, 748, 639);
@@ -260,34 +260,29 @@ public class AccountLoginUi {
 			// 로그인 관련 id 비밀번호 검증 & 조건문을 통해 성공 시 팝업, 아니면 실패 메시지
 			Account loginacc = dao.checkLogin(textID.getText(), textPW.getText());
 			if (loginacc == null) {
-				
+
 				JOptionPane.showMessageDialog(frame, "알맞은 ID 혹은 비밀번호를 입력해주세요.");
 				return;
-				
+
 			} else {
-				
+
 				// 로그인 성공 시 팝업창 띄우고 로그인 이후 메인화면 표현 ( admin 일 경우 관리자 메인 / local 은 일반 메인 )
 				JOptionPane.showMessageDialog(frame, "로그인에 성공했습니다.");
-				
-				if(!loginacc.getId().equals("admin")) {
-					
+
+				if (!loginacc.getId().equals("admin")) {
+
 					// 일반 유저 페이지 - 새 창 켜지면서 현재창은 종료하고 현재 창의 account 정보 넘겨줌.
 					LocalMainview.showMainMenuFrame(loginacc);
-					
-				} else if(loginacc.getId().equals("admin")) {
-					
+
+				} else if (loginacc.getId().equals("admin")) {
+
 					// 관리자 페이지
 					Mainview.showMainMenuFrame(loginacc);
 				}
-				
-				return;
-				
-			}
-			
-			
-			
 
-			
+				return;
+
+			}
 
 		} else if (obj == btnFindAccount) {
 			AccountFindUi.showAccountFindFrame(frame);

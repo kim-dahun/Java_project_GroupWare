@@ -146,7 +146,7 @@ public class Mainview {
 		JLabel lblNewLabel_1 = new JLabel("일반 메뉴");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("D2Coding", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(12, 127, 571, 29);
+		lblNewLabel_1.setBounds(12, 148, 571, 29);
 		panel.add(lblNewLabel_1);
 		
 		JButton btnpost = new JButton("게시판");

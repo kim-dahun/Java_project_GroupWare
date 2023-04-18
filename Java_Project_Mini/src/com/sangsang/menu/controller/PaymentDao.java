@@ -11,9 +11,9 @@ public interface PaymentDao {
 	AccountDaoImpl dao = AccountDaoImpl.getInstance();
 	
 	
-	PaymentContent read(String search);
+	List<PaymentContent> read(String search, int index);
 	
-	List<PaymentContent> read(int[] Selectedempnos);
+	
 	
 	List<PaymentContent> read(); // 모든 데이터를 가진 급여대장 리스트
 	

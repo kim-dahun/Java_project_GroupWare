@@ -22,7 +22,8 @@ public class PaymentContent {
 		public static final String COL_EMPLOYMENTINSURANCE = "employmentinsurance";
 		public static final String COL_OTHERDEDUCTIONS = "otherdeductions";
 		public static final String COL_DEDUCTIONSREASON = "deductionsreason";
-
+		public static final String COL_PAYMONTH = "paymonth";
+		
 	}
 
 	private String name;
@@ -44,7 +45,7 @@ public class PaymentContent {
 	private int employmentInsurance;
 	private int OtherDeductions;
 	private String DeductionsReason;
-
+	private LocalDateTime paymentMonth;
 	public PaymentContent() {
 
 	}
@@ -219,6 +220,6 @@ public class PaymentContent {
 	}
 
 	// 지급 연월
-	private LocalDateTime paymentMonth;
+	
 
 }

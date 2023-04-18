@@ -81,3 +81,5 @@ ALTER TABLE paymentcontent ADD (
 ALTER TABLE account ADD CONSTRAINT acc_posno_fk foreign key (pos_no) references position(posno);
 
 ALTER TABLE paymentcontent ADD CONSTRAINT pay_empno_fk foreign key (empno) references account(emp_no);
+
+ALTER TABLE account ADD CONSTRAINT acc_deptno_fk foreign key (dept_no) references deptlist(deptno);
