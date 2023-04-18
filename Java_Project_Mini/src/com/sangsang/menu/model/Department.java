@@ -7,23 +7,23 @@ public class Department {
 		public static final String TBL_NAME = "deptlist";
 		public static final String COL_DEPTNO = "deptno";
 		public static final String COL_DEPTNAME = "deptname";
-		public static final String COL_DEPTREF = "deptref";
+		public static final String COL_DEPTNODENO = "deptnodeno";
 		
 	}
 	
 	private int deptno;
 	private String deptName;
-	private int deptref;
+	private int deptNodeNo;
 	
 	public Department() {
 		
 	}
 	
-	public Department(int deptno, String deptName, int deptref) {
+	public Department(int deptno, String deptName, int deptNodeno) {
 		super();
 		this.deptno = deptno;
 		this.deptName = deptName;
-		this.deptref = deptref;
+		this.deptNodeNo = deptNodeno;
 	}
 
 	public int getDeptno() {
@@ -42,12 +42,12 @@ public class Department {
 		this.deptName = deptName;
 	}
 
-	public int getDeptref() {
-		return deptref;
+	public int getDeptNodeNo() {
+		return deptNodeNo;
 	}
 
-	public void setDeptref(int deptref) {
-		this.deptref = deptref;
+	public void setDeptNodeNo(int deptNodeNo) {
+		this.deptNodeNo = deptNodeNo;
 	}
 	
 	

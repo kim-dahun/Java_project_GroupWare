@@ -276,6 +276,7 @@ public class AccountSignInUi extends JFrame {
 			int result = dao.writeAcc(account);
 			JOptionPane.showMessageDialog(this, result + "명의 회원가입을 정상적으로 마쳤습니다.", "정상 체크 완료",
 					JOptionPane.CLOSED_OPTION);
+			dispose();
 
 		} else if (obj == btnCheckIdDuple) {
 

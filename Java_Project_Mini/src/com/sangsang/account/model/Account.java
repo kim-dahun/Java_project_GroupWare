@@ -155,7 +155,8 @@ public abstract class Account {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return String.format("해당 유저 %s 의 사번은 %d, 부서는 %s, 직급은 %s 입니다.", name, deptName, positionName);
+		return String.format("유저-%s 사번-%s 부서-%s, 직급-%s", name, empNo , deptName, positionName);
+		
 	}
 
 }

@@ -26,22 +26,25 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class LocalMainview {
 
 	private JFrame frame;
 	private JTextField textField;
+	private Account loginacc;
 	
 	private AccountDaoImpl accdao = AccountDaoImpl.getInstance();
 	private List<Account> acclist = accdao.read();
 	/**
 	 * Launch the application.
 	 */
-	public static void showMainMenuFrame() {
+	public static void showMainMenuFrame(Account acc) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LocalMainview window = new LocalMainview();
+					LocalMainview window = new LocalMainview(acc);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +58,9 @@ public class LocalMainview {
 	/**
 	 * Create the application.
 	 */
-	public LocalMainview() {
+	public LocalMainview(Account acc) {
 		initialize();
+		this.loginacc = acc;
 	}
 
 	/**
@@ -64,7 +68,7 @@ public class LocalMainview {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("관리자 페이지");
+		frame.setTitle("일반 사용자 페이지");
 		frame.setBounds(100, 100, 850, 448);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -133,6 +137,12 @@ public class LocalMainview {
 		panel.setBackground(Color.WHITE);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		
+		JLabel lblnowLogin = new JLabel(loginacc.toString());
+		lblnowLogin.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblnowLogin.setFont(new Font("D2Coding", Font.PLAIN, 15));
+		lblnowLogin.setBounds(148, 10, 595, 22);
+		panel.add(lblnowLogin);
 	}
 
 

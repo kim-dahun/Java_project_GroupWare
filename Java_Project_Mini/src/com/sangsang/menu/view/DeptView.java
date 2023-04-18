@@ -29,7 +29,7 @@ public class DeptView extends JFrame {
 	private JComboBox comboBox;
 	private JButton btndeletedept;
 	private JButton btndeptlist;
-	private JButton btnmodify;
+	private JButton btnsearch;
 
 	/**
 	 * Launch the application.
@@ -120,6 +120,12 @@ public class DeptView extends JFrame {
 		panel.add(btnadddept);
 
 		btndeletedept = new JButton("부서 삭제");
+		btndeletedept.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				handleclickEvent(e);
+			}
+		});
 		btndeletedept.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		btndeletedept.setBounds(353, 488, 226, 43);
 		panel.add(btndeletedept);
@@ -128,16 +134,24 @@ public class DeptView extends JFrame {
 		btndeptlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				handleclickEvent(e);
+				
 			}
 		});
 		btndeptlist.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		btndeptlist.setBounds(35, 488, 248, 43);
 		panel.add(btndeptlist);
 
-		btnmodify = new JButton("부서 수정");
-		btnmodify.setFont(new Font("D2Coding", Font.PLAIN, 20));
-		btnmodify.setBounds(353, 318, 226, 43);
-		panel.add(btnmodify);
+		btnsearch = new JButton("부서 검색");
+		btnsearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				handleclickEvent(e);
+				
+			}
+		});
+		btnsearch.setFont(new Font("D2Coding", Font.PLAIN, 20));
+		btnsearch.setBounds(353, 318, 226, 43);
+		panel.add(btnsearch);
 	}
 
 	protected void handleclickEvent(ActionEvent e) {
@@ -145,15 +159,25 @@ public class DeptView extends JFrame {
 		Object obj = e.getSource();
 
 		if (obj == btnadddept) {
-
+			
+			DeptAddView.showmydeptAdd();
+			
 		} else if (obj == btndeptlinkdept) {
-
+			
+			
+			
 		} else if (obj == btndeletedept) {
 
-		} else if (obj == btnmodify) {
+			DeptDeleteView.showmydeptDelete();
+			
+		} else if (obj == btnsearch) {
 
+			DeptSearchView.showmydeptsearch();
+			
 		} else if (obj == btndeptlist) {
-
+			
+			DeptMiniView.showMydeptlist();
+			
 		}
 
 	}

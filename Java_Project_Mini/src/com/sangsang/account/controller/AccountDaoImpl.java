@@ -12,6 +12,7 @@ import static com.sangsang.account.model.Account.Entity.*;
 import static com.sangsang.account.model.OrcaleDbLowData.*;
 import com.sangsang.account.model.Account;
 import com.sangsang.account.model.AccountLocalUser;
+import com.sangsang.ojdbc.OracleDbConnectionTool;
 
 import oracle.jdbc.OracleDriver;
 
@@ -94,7 +95,7 @@ public class AccountDaoImpl implements AccountDao {
 		ResultSet rs = null;
 
 		try {
-			conn = getConnection();
+			conn = OracleDbConnectionTool.getConnection();
 
 			stmt = conn.prepareStatement(SqlMember.SqlReadEach);
 			stmt.setString(1, search);
@@ -127,7 +128,7 @@ public class AccountDaoImpl implements AccountDao {
 		} finally {
 
 			try {
-				closeConnection(conn, stmt, rs);
+				OracleDbConnectionTool.closeConnection(conn, stmt, rs);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -147,7 +148,7 @@ public class AccountDaoImpl implements AccountDao {
 		ResultSet rs = null;
 
 		try {
-			conn = getConnection();
+			conn = OracleDbConnectionTool.getConnection();
 
 			stmt = conn.prepareStatement(SqlMember.SqlRead);
 
@@ -166,7 +167,7 @@ public class AccountDaoImpl implements AccountDao {
 				String empno = rs.getString(COL_EMPNO);
 				int deptno = rs.getInt(COL_DEPTNO);
 				String deptName = rs.getString(COL_DEPTNAME);
-				int isAdmin = rs.getString(COL_ISADMIN).equals("true") ? 1 : 0;
+				int isAdmin = rs.getString(COL_ISADMIN).equals("true".toLowerCase()) ? 1 : 0;
 
 				AccountLocalUser user = new AccountLocalUser(eid, id, pw, name, phone, email, deptno, deptName, empno,
 						posNo, posName);
@@ -180,7 +181,7 @@ public class AccountDaoImpl implements AccountDao {
 		} finally {
 
 			try {
-				closeConnection(conn, stmt, rs);
+				OracleDbConnectionTool.closeConnection(conn, stmt, rs);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -200,7 +201,7 @@ public class AccountDaoImpl implements AccountDao {
 		int result = 0;
 
 		try {
-			conn = getConnection();
+			conn = OracleDbConnectionTool.getConnection();
 
 			stmt = conn.prepareStatement(SqlMember.SqlWrite);
 
@@ -222,7 +223,7 @@ public class AccountDaoImpl implements AccountDao {
 		} finally {
 
 			try {
-				closeConnection(conn, stmt);
+				OracleDbConnectionTool.closeConnection(conn, stmt);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -243,7 +244,7 @@ public class AccountDaoImpl implements AccountDao {
 		int result = 0;
 
 		try {
-			conn = getConnection();
+			conn = OracleDbConnectionTool.getConnection();
 
 			stmt = conn.prepareStatement(SqlMember.SqlDelete);
 
@@ -257,7 +258,7 @@ public class AccountDaoImpl implements AccountDao {
 		} finally {
 
 			try {
-				closeConnection(conn, stmt);
+				OracleDbConnectionTool.closeConnection(conn, stmt);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -276,7 +277,7 @@ public class AccountDaoImpl implements AccountDao {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = getConnection();
+			conn = OracleDbConnectionTool.getConnection();
 
 			stmt = conn.prepareStatement(SqlMember.SqlModifyAdmin);
 			stmt.setString(1, account.getPw());
@@ -295,7 +296,7 @@ public class AccountDaoImpl implements AccountDao {
 		} finally {
 
 			try {
-				closeConnection(conn, stmt);
+				OracleDbConnectionTool.closeConnection(conn, stmt);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -314,7 +315,7 @@ public class AccountDaoImpl implements AccountDao {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = getConnection();
+			conn = OracleDbConnectionTool.getConnection();
 
 			stmt = conn.prepareStatement(SqlMember.SqlModifyLocal);
 			stmt.setString(1, account.getPw());
@@ -330,7 +331,7 @@ public class AccountDaoImpl implements AccountDao {
 		} finally {
 
 			try {
-				closeConnection(conn, stmt);
+				OracleDbConnectionTool.closeConnection(conn, stmt);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
