@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.menu.model.Department;
+import com.sangsang.menu.model.PaymentContent;
 import com.sangsang.menu.model.Position;
 import com.sangsang.ojdbc.OracleDbConnectionTool;
 import static com.sangsang.menu.model.Position.Entity.*;
@@ -152,4 +153,7 @@ public class MenuPosDaoImpl implements MenuPosDao {
 		return result;
 	}
 
+	
+	
+	
 }

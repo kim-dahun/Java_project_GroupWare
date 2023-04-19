@@ -22,6 +22,8 @@ import javax.swing.tree.TreeNode;
 
 import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
+import com.sangsang.menu.model.PaymentContent;
+import com.sangsang.menu2.view.PaymentContentView;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.Color;
@@ -160,6 +162,13 @@ public class Mainview {
 		panel.add(btnCal);
 		
 		JButton btnSal = new JButton("급여 관리");
+		btnSal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				PaymentContentView.showMypaymentContentFrame();
+				
+			}
+		});
 		btnSal.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		btnSal.setBounds(438, 187, 145, 39);
 		panel.add(btnSal);

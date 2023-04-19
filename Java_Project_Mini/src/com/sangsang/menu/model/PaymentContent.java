@@ -45,7 +45,7 @@ public class PaymentContent {
 	private int employmentInsurance;
 	private int OtherDeductions;
 	private String DeductionsReason;
-	private LocalDateTime paymentMonth;
+	private String paymentMonth;
 	public PaymentContent() {
 
 	}
@@ -53,7 +53,7 @@ public class PaymentContent {
 	public PaymentContent(String name, String empno, String posName, String deptName, int baseSal, int bonus,
 			int overtimePay, int meals, int vehicleMaintenance, int severancePay, int incomeTax, int residentTax,
 			int healthInsurancePremium, int nationalPension, int employmentInsurance, int otherDeductions,
-			String deductionsReason, LocalDateTime paymentMonth) {
+			String deductionsReason, String paymentMonth) {
 		super();
 		this.name = name;
 		this.empno = empno;
@@ -211,11 +211,11 @@ public class PaymentContent {
 		DeductionsReason = deductionsReason;
 	}
 
-	public LocalDateTime getPaymentMonth() {
+	public String getPaymentMonth() {
 		return paymentMonth;
 	}
 
-	public void setPaymentMonth(LocalDateTime paymentMonth) {
+	public void setPaymentMonth(String paymentMonth) {
 		this.paymentMonth = paymentMonth;
 	}
 

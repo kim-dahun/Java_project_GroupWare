@@ -12,6 +12,7 @@ import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
 import com.sangsang.account.model.AccountAdmin;
 import com.sangsang.account.model.AccountLocalUser;
+import com.sangsang.menu.controller.MenuDeptDaoImpl;
 
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
@@ -45,6 +46,7 @@ public class AccountSignInUi extends JFrame {
 	private JComboBox comboBox;
 	private boolean checkId = false;
 	private AccountDaoImpl dao = AccountDaoImpl.getInstance();
+	private String[] combolist = MenuDeptDaoImpl.getInstance().readName();
 
 	/**
 	 * Launch the application.
@@ -184,7 +186,7 @@ public class AccountSignInUi extends JFrame {
 		comboBox.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		comboBox.setBackground(Color.WHITE);
 		comboBox.setForeground(Color.BLACK);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"10 Management Support dept", "20 F&A team", "30 HR team", "40 CS team", "50 GA team", "60 Sales Management dept", "70 Sales team", "80 S&Support team", "90 S&Planning team", "100 S&Global team", "110 Production Management dept", "120 QA team", "130 QC team", "140 P&C team", "150 P&T team", "160 CEO"}));
+		comboBox.setModel(new DefaultComboBoxModel(combolist));
 		comboBox.setSelectedIndex(1);
 		comboBox.setBounds(171, 347, 182, 49);
 		panel.add(comboBox);

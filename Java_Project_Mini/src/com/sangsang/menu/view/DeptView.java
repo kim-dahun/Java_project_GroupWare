@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.sangsang.menu.controller.MenuDeptDaoImpl;
+
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -30,7 +33,8 @@ public class DeptView extends JFrame {
 	private JButton btndeletedept;
 	private JButton btndeptlist;
 	private JButton btnsearch;
-
+	private String[] combolist = MenuDeptDaoImpl.getInstance().readName();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -78,10 +82,7 @@ public class DeptView extends JFrame {
 
 		comboBox_1 = new JComboBox();
 		comboBox_1.setFont(new Font("D2Coding", Font.PLAIN, 20));
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "10 Management Support dept", "20 F&A team",
-				"30 HR team", "40 CS team", "50 GA team", "60 Sales Management dept", "70 Sales team",
-				"80 S&Support team", "90 S&Planning team", "100 S&Global team", "110 Production Management dept",
-				"120 QA team", "130 QC team", "140 P&C team", "150 P&T team", "160 CEO" }));
+		comboBox_1.setModel(new DefaultComboBoxModel(combolist));
 		comboBox_1.setBounds(35, 277, 248, 43);
 		panel.add(comboBox_1);
 

@@ -127,6 +127,7 @@ public class MenuDeptDaoImpl implements MenuDeptDao {
 	// 읽어온 부서 목록을 콤보박스의 목록으로 만드는 메서드
 	public String[] readName() {
 		// TODO Auto-generated method stub
+		deptlist = read();
 		String[] deptcombo = new String[deptlist.size()];
 
 		for(int i = 0 ; i < deptcombo.length; i++) {
