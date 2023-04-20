@@ -24,6 +24,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class EmployeeView extends JFrame {
 
@@ -83,6 +85,14 @@ public class EmployeeView extends JFrame {
 	}
 
 	public EmployeeView() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				refreshtable();
+				
+			}
+		});
 
 		initialize();
 
@@ -181,6 +191,8 @@ public class EmployeeView extends JFrame {
 
 			refreshtableSearch();
 
+			return;
+
 		} else if (obj == btnModifiedAccount) {
 
 			String search = JOptionPane.showInputDialog(this, "수정하고 싶은 사원의 아이디를 입력해주세요.");
@@ -188,7 +200,15 @@ public class EmployeeView extends JFrame {
 			Account acc = dao.SearchOne(search);
 			
 			
-
+				if(acc.getId()==null) {
+					JOptionPane.showMessageDialog(this, "검색한 ID를 확인하거나 admin 계정이 아닌지 확인해주세요. admin 계정은 수정할 수 없습니다.");
+					System.out.println("메서드 정상 작동");
+					return;
+				} else {
+				EmployeeModifiedView.showMyEmpModifedFrame(acc);
+				}
+			
+			
 			
 
 		} else if (obj == btnDeleteAccount) {
@@ -209,9 +229,7 @@ public class EmployeeView extends JFrame {
 
 		} else if (obj == btnRefresh) {
 
-			refreshtable();
-
 		}
-
+		refreshtable();
 	}
 }

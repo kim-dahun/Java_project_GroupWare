@@ -114,7 +114,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		acclist = dao.read();
 		for (int i = 0; i < acclist.size(); i++) {
 			String chId = acclist.get(i).getId();
-			if (id.equals(chId) || !id.equals("admin")) {
+			if (id.equals(chId) && !id.equals("admin")) {
 
 				return acclist.get(i);
 

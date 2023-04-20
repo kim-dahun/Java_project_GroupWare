@@ -65,6 +65,7 @@ public class EmployeeModifiedView extends JFrame {
 		setTitle("사원 수정");
 		this.acc = acc;
 		initialize();
+		setModityFrame();
 		
 	}
 	
@@ -208,18 +209,14 @@ public class EmployeeModifiedView extends JFrame {
 			
 		} else if (obj == btnModify) {
 			int result = checkClean();
-			if(result == 1) {
+			if(result == 0) {
 				return;
 				
 			}
 			makeUpdate();
 			result = dao.modifiedAccount(acc);
 
-			if (result == 0) {
-
-				JOptionPane.showMessageDialog(this, "검색한 ID를 확인하거나 admin 계정이 아닌지 확인해주세요. admin 계정은 수정할 수 없습니다.");
-				return;
-			}
+			
 
 			JOptionPane.showMessageDialog(this, result + " 개의 사원이 수정되었습니다.");
 			

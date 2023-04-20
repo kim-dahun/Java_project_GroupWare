@@ -90,7 +90,7 @@ public class Mainview {
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
-		textArea.setText("조직도 자리");
+		textArea.setText("조직도 자리\n");
 		scrollPane.setViewportView(textArea);
 		
 		TreeNode ceo = new DefaultMutableTreeNode("a");
@@ -154,12 +154,6 @@ public class Mainview {
 		btnempad.setBounds(438, 63, 145, 39);
 		panel.add(btnempad);
 		
-		JLabel lblNewLabel_1 = new JLabel("일반 메뉴");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("D2Coding", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(12, 148, 571, 29);
-		panel.add(lblNewLabel_1);
-		
 		JButton btnpost = new JButton("로그인 화면");
 		btnpost.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,6 +170,10 @@ public class Mainview {
 		panel.add(btnpost);
 		
 		JButton btnCal = new JButton("일정관리");
+		btnCal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCal.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		btnCal.setBounds(226, 187, 145, 39);
 		panel.add(btnCal);

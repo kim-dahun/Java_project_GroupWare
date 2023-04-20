@@ -15,6 +15,8 @@ import static com.sangsang.menu.model.Position.Entity.*;
 
 public class MenuPosDaoImpl implements MenuPosDao {
 
+	String[] select = new String[4];
+	
 	public interface SqlListPos{
 		
 		public static final String SQLREADPOS = String.format("SELECT * FROM %s ORDER BY %s", TBL_NAME, COL_POSNO );
