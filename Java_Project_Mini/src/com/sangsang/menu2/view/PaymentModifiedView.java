@@ -383,8 +383,8 @@ public class PaymentModifiedView extends JFrame {
 
 			return;
 		} else if (obj == btnSave) {
-
-			if (payment == null || payment.getPaymentMonth().isBlank()) {
+			String regex = "\\d{4}-\\d{2}";
+			if (payment == null || payment.getPaymentMonth().isBlank() || !input.getPaymonth().matches(regex)) {
 				JOptionPane.showMessageDialog(this, "입력된 내용이 없거나, 귀속연월이 입력되지 않은 상태입니다.");
 				return;
 			}
@@ -414,23 +414,15 @@ public class PaymentModifiedView extends JFrame {
 
 			}
 
-			List<PaymentContent> paylist = dao.read();
+			
 			String sel = comboBox.getSelectedItem().toString();
+			String pmt = textPaymonth.getText();
 			
-			for (int i = 0; i < paylist.size(); i++) {
-
-				if (sel.equals(paylist.get(i).getEmpno())
-						&& textPaymonth.getText().equals(paylist.get(i).getPaymentMonth())) {
-
-					payment = paylist.get(i);
-
-					input.setReadValue(payment);
-					refreshTax();
-
-				}
-
-			}
+			payment = dao.search(sel, pmt);
 			
+			
+			input.setReadValue(payment);
+			refreshTax();
 
 		}
 

@@ -15,7 +15,7 @@ public abstract class Account {
 		public static final String COL_DEPTNAME = "DEPT_NAME";
 		public static final String COL_EMPNO = "EMP_NO";
 		public static final String COL_POSITIONNO="POS_NO";
-		public static final String COL_POSTIONNAME="POS_NAME";
+		public static final String COL_POSITIONNAME="POS_NAME";
 		public static final String COL_ISADMIN = "ISADMIN";
 	}
 	

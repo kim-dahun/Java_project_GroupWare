@@ -22,7 +22,9 @@ import javax.swing.tree.TreeNode;
 
 import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
+import com.sangsang.account.view.AccountLoginUi;
 import com.sangsang.menu.model.PaymentContent;
+import com.sangsang.menu2.view.EmployeeView;
 import com.sangsang.menu2.view.PaymentContentView;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -79,7 +81,7 @@ public class Mainview {
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setTitle("관리자 페이지");
 		frame.setBounds(100, 100, 850, 448);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -141,6 +143,13 @@ public class Mainview {
 		panel.add(btnposad);
 		
 		JButton btnempad = new JButton("사원 관리");
+		btnempad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EmployeeView.showMyemployee();
+				
+			}
+		});
 		btnempad.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		btnempad.setBounds(438, 63, 145, 39);
 		panel.add(btnempad);
@@ -151,7 +160,17 @@ public class Mainview {
 		lblNewLabel_1.setBounds(12, 148, 571, 29);
 		panel.add(lblNewLabel_1);
 		
-		JButton btnpost = new JButton("게시판");
+		JButton btnpost = new JButton("로그인 화면");
+		btnpost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				AccountLoginUi.getFrame().setVisible(true);
+				frame.dispose();
+				//TODO
+				
+				
+			}
+		});
 		btnpost.setFont(new Font("D2Coding", Font.PLAIN, 20));
 		btnpost.setBounds(12, 187, 145, 39);
 		panel.add(btnpost);

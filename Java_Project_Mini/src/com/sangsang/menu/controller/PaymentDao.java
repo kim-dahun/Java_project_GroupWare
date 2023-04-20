@@ -1,5 +1,6 @@
 package com.sangsang.menu.controller;
 
+import java.awt.Component;
 import java.util.List;
 
 import com.sangsang.account.controller.AccountDaoImpl;
@@ -23,6 +24,6 @@ public interface PaymentDao {
 	
 	int modifiedPay(PaymentContent payment); // 선택한 급여기록 수정
 	
-	int printPay(List<PaymentContent> list);
+	//int printPay(List<PaymentContent> list, Component com);
 	
 }

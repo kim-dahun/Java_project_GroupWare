@@ -35,7 +35,7 @@ import java.awt.event.MouseEvent;
 
 public class AccountLoginUi {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private JTextField textID;
 	private JTextField textPW;
 	private JButton btnNewSign;
@@ -45,6 +45,13 @@ public class AccountLoginUi {
 	private JLabel lblNewLabel_1_1;
 	private AccountDaoImpl dao = AccountDaoImpl.getInstance();
 
+	
+	public static JFrame getFrame() {
+		
+		
+		return frame;
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -280,6 +287,7 @@ public class AccountLoginUi {
 					Mainview.showMainMenuFrame(loginacc);
 				}
 
+				frame.setVisible(false);
 				return;
 
 			}

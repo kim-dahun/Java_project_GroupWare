@@ -1,8 +1,9 @@
 package com.sangsang.menu.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class PaymentContent {
+public class PaymentContent implements Serializable {
 
 	public interface Entity {
 

@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import com.sangsang.menu.controller.PaymentDaoImpl;
+import com.sangsang.menu.controller.PaymentDaoImpl.FileBackup;
 import com.sangsang.menu.model.PaymentContent;
 import com.sangsang.menu.model.Position;
 
@@ -275,11 +276,31 @@ public class PaymentContentView extends JFrame {
 		} else if (obj == btnPrintFile) {
 
 			// 급여대장 파일변환
+			int selecs = JOptionPane.showConfirmDialog(this, "정말로 백업을 진행하시겠습니까?", "백업 여부 확인", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 			
+			if(selecs==0) {
+				
+				int result = FileBackup.FileBackUp();
+				
+				if(result == 1) {
+					
+					JOptionPane.showMessageDialog(this, "급여리스트 백업에 성공했습니다.");
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(this, "급여리스트 백업에 실패했습니다.");
+					
+				}
+			
+			}
+			
+			return;
 			
 
 		} else if (obj == btnPrintPay) {
 
+			PaymentPrintView.showMyprintpreview();
+			
 			// 명세서 출력
 
 		}

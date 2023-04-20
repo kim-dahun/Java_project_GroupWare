@@ -110,7 +110,7 @@ public class AccountDaoImpl implements AccountDao {
 				String phone = rs.getString(COL_PHONE);
 				String email = rs.getString(COL_EMAIL);
 				int posNo = rs.getInt(COL_POSITIONNO);
-				String posName = rs.getString(COL_POSTIONNAME);
+				String posName = rs.getString(COL_POSITIONNAME);
 				String empno = rs.getString(COL_EMPNO);
 				int deptno = rs.getInt(COL_DEPTNO);
 				String deptName = rs.getString(COL_DEPTNAME);
@@ -163,7 +163,7 @@ public class AccountDaoImpl implements AccountDao {
 				String phone = rs.getString(COL_PHONE);
 				String email = rs.getString(COL_EMAIL);
 				int posNo = rs.getInt(COL_POSITIONNO);
-				String posName = rs.getString(COL_POSTIONNAME);
+				String posName = rs.getString(COL_POSITIONNAME);
 				String empno = rs.getString(COL_EMPNO);
 				int deptno = rs.getInt(COL_DEPTNO);
 				String deptName = rs.getString(COL_DEPTNAME);
@@ -287,6 +287,7 @@ public class AccountDaoImpl implements AccountDao {
 			stmt.setInt(5, account.getDeptNo());
 			stmt.setInt(6, account.getPositionNo());
 			stmt.setString(7, account.getEmpNo());
+			stmt.setString(8, account.getId());
 
 			result = stmt.executeUpdate();
 

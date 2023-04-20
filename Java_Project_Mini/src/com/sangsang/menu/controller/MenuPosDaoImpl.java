@@ -42,6 +42,23 @@ public class MenuPosDaoImpl implements MenuPosDao {
 
 	private List<Position> poslist;
 
+	
+	public String[] readName() {
+		
+		poslist = read();
+		String[] list = new String[poslist.size()];
+		
+		for(int i = 0 ; i<poslist.size() ; i++ ) {
+			
+			list[i]=poslist.get(i).getPosName();
+			
+		}
+		
+		return list;
+		
+	}
+	
+	
 	@Override
 	public Position read(String search) {
 		// TODO Auto-generated method stub
