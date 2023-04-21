@@ -25,6 +25,7 @@ import com.sangsang.account.model.Account;
 import com.sangsang.account.view.AccountLoginUi;
 import com.sangsang.menu.model.PaymentContent;
 import com.sangsang.menu2.view.EmployeeView;
+import com.sangsang.menu2.view.GanttChartView;
 import com.sangsang.menu2.view.PaymentContentView;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -172,6 +173,9 @@ public class Mainview {
 		JButton btnCal = new JButton("일정관리");
 		btnCal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				GanttChartView.showMyGanttChartMain();
+				
 			}
 		});
 		btnCal.setFont(new Font("D2Coding", Font.PLAIN, 20));

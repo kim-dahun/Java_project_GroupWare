@@ -50,3 +50,5 @@ chart.getCategoryPlot().setRenderer(renderer);
 
 ChartPanel chartPanel = new ChartPanel(chart);
 위 코드에서 TaskSeries 클래스와 Task 클래스는 org.jfree.data.gantt 패키지에 있습니다
+
+COL_EMPNO_SCH,COL_STARTDAY,COL_ENDDAY,COL_TITLE,COL_CONTENT

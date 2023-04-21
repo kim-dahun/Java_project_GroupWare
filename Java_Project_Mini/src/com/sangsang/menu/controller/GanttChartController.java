@@ -7,13 +7,13 @@ import com.sangsang.menu.model.GanttChart;
 
 public interface GanttChartController {
 
-	Task makeTask(GanttChart gantt);
+	Task makeTask(GanttChart gantt); // 다오에서 받아야함. DB의 한줄
 	// 간트차트에 필요한 데이터를 입력받아서 차트를 생성함
 	
-	TaskSeriesCollection tasklist = new TaskSeriesCollection();
+	TaskSeriesCollection tasklist = new TaskSeriesCollection(); // 다오에서 받아야함. DB에서 받아온 데이터리스트
 	// 데이터를 받아둘 컬렉션 객체
 	
-//	GanttRenderer renderer = new GanttRenderer();
+//	GanttRenderer renderer = new GanttRenderer(); // 메인
 //
 //	CategoryPlot plot = new CategoryPlot();
 //	plot.setDataset(dataset);

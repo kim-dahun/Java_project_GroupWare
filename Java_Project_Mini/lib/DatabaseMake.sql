@@ -85,3 +85,16 @@ ALTER TABLE paymentcontent ADD CONSTRAINT pay_empno_fk foreign key (empno) refer
 ALTER TABLE account ADD CONSTRAINT acc_deptno_fk foreign key (dept_no) references deptlist(deptno);
 
 
+
+CREATE TABLE schedule (
+    empno varchar(10 char) CONSTRAINT sch_empno_pk primary key,
+    startday timestamp NOT NULL,
+    endday timestamp NOT NULL,
+    title varchar(100 char),
+    content varchar(1000 char)
+    
+);
+
+ALTER TABLE schedule ADD CONSTRAINT sch_empno_fk foreign key (empno) references account(emp_no);
+
+ALTER TABLE schedule ADD (contentno number(10));

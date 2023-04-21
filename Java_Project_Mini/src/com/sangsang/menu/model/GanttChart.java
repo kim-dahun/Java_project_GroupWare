@@ -4,11 +4,24 @@ import java.time.LocalDateTime;
 
 public class GanttChart {
 	
+	public interface EntityGantt{
+		
+		public static final String TBL_NAME_SCH = "SCHEDULE";
+		public static final String COL_CONTENTNO = "CONTENTNO";
+		public static final String COL_EMPNO_SCH = "EMPNO";
+		public static final String COL_STARTDAY = "STARTDAY";
+		public static final String COL_ENDDAY = "ENDDAY";
+		public static final String COL_TITLE = "TITLE";
+		public static final String COL_CONTENT = "CONTENT";
+		
+	}
+	
 	private String id;
 	private String empno;
 	private String name;
 	// join 해서 가져올 필드값;
 	
+	private int contentno;
 	private LocalDateTime startDay;
 	private LocalDateTime endDay;
 	private String title;
@@ -22,7 +35,7 @@ public class GanttChart {
 	
 	
 	public GanttChart(String id, String empno, String name, LocalDateTime startDay, LocalDateTime endDay, String title,
-			String content) {
+			String content, int contentno) {
 		super();
 		this.id = id;
 		this.empno = empno;
@@ -31,6 +44,7 @@ public class GanttChart {
 		this.endDay = endDay;
 		this.title = title;
 		this.content = content;
+		this.contentno = contentno;
 	}
 
 
@@ -102,6 +116,17 @@ public class GanttChart {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
+	public int getContentno() {
+		return contentno;
+	}
+
+
+	public void setContentno(int contentno) {
+		this.contentno = contentno;
+	}
+	
 	
 	
 	
