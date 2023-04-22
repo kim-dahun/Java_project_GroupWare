@@ -209,6 +209,8 @@ public class EmployeeModifiedView extends JFrame {
 			
 		} else if (obj == btnModify) {
 			int result = checkClean();
+			
+			
 			if(result == 0) {
 				return;
 				
@@ -257,7 +259,7 @@ public class EmployeeModifiedView extends JFrame {
 		textName.setText(acc.getName());
 		
 		if(acc.getEmpNo()==null) {
-			textEmpno.setText("1988-001");
+			textEmpno.setText("필수 입력");
 			
 		} else {
 			textEmpno.setText(acc.getEmpNo());
@@ -321,6 +323,21 @@ public class EmployeeModifiedView extends JFrame {
 			
 			
 		}
+		
+		
+		
+		for(int i = 0; i < dao.read().size() ; i++) {
+			
+			if(textEmpno.getText().equals(dao.read().get(i).getEmpNo())) {
+				JOptionPane.showMessageDialog(this, "중복된 사원번호가 존재합니다.", "사원번호 입력 형식 오류",
+						JOptionPane.CLOSED_OPTION);
+				return 0;
+				
+			}
+			
+		}
+		
+		
 		
 		return result;
 		

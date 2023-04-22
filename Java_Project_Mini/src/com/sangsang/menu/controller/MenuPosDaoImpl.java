@@ -81,7 +81,7 @@ public class MenuPosDaoImpl implements MenuPosDao {
 			
 			while(rs.next()) {
 				
-				Position pos = new Position ( rs.getInt(1), rs.getString(2));
+				Position pos = new Position ( rs.getInt(COL_POSNO), rs.getString(COL_POSNAME));
 				poslist.add(pos);
 				
 				

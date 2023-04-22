@@ -264,7 +264,7 @@ public class PaymentAddView extends JFrame {
 			this.taxlist = dao.taxArray(payment);
 		}
 
-		textArea.setText("귀속연월 : " + input.getPaymonth() + "\r\n" + "이름 : " + input.getName() + "\r\n" + "사번 : \r\n"
+		textArea.setText("귀속연월 : " + input.getPaymonth() + "\r\n" + "이름 : " + input.getName() + "\r\n" + "사번 :"+ input.getEmpno() + "\r\n"
 				+ "부서 : " + input.getDeptname() + "\r\n" + "직급 : " + input.getPosname() + "\r\n" + "기본급 : "
 				+ input.getBasesal() + "\r\n" + "상여 : " + input.getBouns() + "\r\n" + "연장수당 : " + input.getOt() + "\r\n"
 				+ "식대 : " + input.getMl() + "\r\n" + "차량유지비 : " + input.getVm() + "\r\n" + "퇴직금 : " + input.getSv()

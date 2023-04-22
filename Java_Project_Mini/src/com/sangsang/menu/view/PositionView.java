@@ -67,6 +67,7 @@ public class PositionView extends JFrame {
 
 		}
 
+		System.out.println(table.getRowCount());
 		table.setModel(model);
 
 	}
@@ -171,7 +172,7 @@ public class PositionView extends JFrame {
 			}
 			
 			Integer select = JOptionPane.showOptionDialog(this, "정말 삭제하시겠습니까?", "삭제 전 최종확인", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-			System.out.println(select);
+			
 			if(select == 0) {
 				List<Position> list = dao.read();
 				

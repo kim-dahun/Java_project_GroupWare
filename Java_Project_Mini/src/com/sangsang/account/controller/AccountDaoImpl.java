@@ -39,6 +39,11 @@ public class AccountDaoImpl implements AccountDao {
 		public static final String SqlRead = String.format("SELECT * FROM %s ORDER BY %s", TBL_NAME, COL_POSITIONNO);
 		public static final String SqlReadEach = String.format("SELECT * FROM %s WHERE %s = ?" , TBL_NAME,
 				COL_ID);
+		
+		public static final String SqlWriteAdmin = String.format(
+				"INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+				TBL_NAME, COL_ID, COL_PW, COL_NAME, COL_PHONE, COL_EMAIL, COL_DEPTNO, COL_DEPTNAME, COL_ISADMIN, COL_POSITIONNO, COL_POSITIONNAME, COL_EMPNO);
+		
 		public static final String SqlWrite = String.format(
 				"INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
 				TBL_NAME, COL_ID, COL_PW, COL_NAME, COL_PHONE, COL_EMAIL, COL_DEPTNO, COL_DEPTNAME, COL_ISADMIN);
@@ -54,6 +59,21 @@ public class AccountDaoImpl implements AccountDao {
 	// field
 
 	private List<Account> acclist;
+	private Account nowLogin;
+	
+	public Account getNowlogin() {
+		
+		
+		return nowLogin;
+	}
+	
+	public void setNowLogin(Account acc) {
+		
+		this.nowLogin = acc;
+		
+		
+	}
+	
 
 	// DB 연결에 관련된 메서드
 	public Connection getConnection() throws Exception {
@@ -192,6 +212,54 @@ public class AccountDaoImpl implements AccountDao {
 		return acclist;
 	}
 
+
+	public int writeAccAdmin(Account account) {
+		// TODO Auto-generated method stub
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int result = 0;
+
+		try {
+			conn = OracleDbConnectionTool.getConnection();
+
+			stmt = conn.prepareStatement(SqlMember.SqlWriteAdmin);
+
+			stmt.setString(1, account.getId());
+			stmt.setString(2, account.getPw());
+			stmt.setString(3, account.getName());
+			stmt.setString(4, account.getPhone());
+			stmt.setString(5, account.getEmail());
+			stmt.setInt(6, account.getDeptNo());
+			stmt.setString(7, account.getDeptName());
+			String isadmin = account.getIsAdmin() == 1 ? "true" : "false";
+			stmt.setString(8,isadmin);
+			stmt.setInt(9, account.getPositionNo());
+			stmt.setString(10,account.getPositionName());
+			stmt.setString(11,account.getEmpNo());
+
+			result = stmt.executeUpdate();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			try {
+				OracleDbConnectionTool.closeConnection(conn, stmt);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		return result;
+
+	}
+	
+	
+	
 	@Override
 	public int writeAcc(Account account) {
 		// TODO Auto-generated method stub
@@ -350,7 +418,7 @@ public class AccountDaoImpl implements AccountDao {
 
 		for (Account acc : acclist) {
 
-			if (acc.getName().equals(name) && acc.getEmpNo().equals(empno)) {
+			if (name.equals(acc.getName()) && empno.equals(acc.getEmpNo())) {
 
 				return acc.getId();
 
@@ -358,7 +426,7 @@ public class AccountDaoImpl implements AccountDao {
 
 		}
 
-		return null;
+		return "";
 	}
 
 	@Override
@@ -368,7 +436,7 @@ public class AccountDaoImpl implements AccountDao {
 
 		for (Account acc : acclist) {
 
-			if (acc.getId().equals(id) && acc.getEmail().equals(email)) {
+			if (id.equals(acc.getId()) && email.equals(acc.getEmail())) {
 
 				return acc.getPw();
 
@@ -376,7 +444,7 @@ public class AccountDaoImpl implements AccountDao {
 
 		}
 
-		return null;
+		return "";
 	}
 
 	

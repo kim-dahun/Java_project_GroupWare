@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
@@ -37,6 +38,7 @@ import java.awt.FlowLayout;
 public class GanttChartView extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel panel;
 //	private TaskSeries gantt;
 	private JButton btnAddNewWork;
 	private JButton btnDeleteMyWork;
@@ -46,9 +48,11 @@ public class GanttChartView extends JFrame {
 	private JFreeChart chart;
 	private ChartPanel chartPanel;
 	private JScrollPane scrollchartpane;
-	private Font mainfont = new Font("D2Coding", Font.PLAIN, 25);
+	private Font mainfont = new Font("D2Coding", Font.PLAIN, 20);
 	private Font mainTitleFont = new Font("D2Coding",Font.PLAIN,35);
 	private static int moveValue = 0;
+	private JButton btnBack;
+	private JButton btnFront;
 	
 	/**
 	 * Launch the application.
@@ -71,7 +75,24 @@ public class GanttChartView extends JFrame {
 
 	public void refreshChart() {
 		
-		TaskSeriesCollection taskGroup = dao.readTask();
+		panel.remove(scrollchartpane);
+		refreshChartFirst();
+		
+	}
+	
+	public void refreshChartFirst() {
+		long timeScale = 7 * 1 * 24 * 60 * 60 * 1000;
+		long nextWeekTime = new Date().getTime() + (7 * moveValue * 24 * 60 * 60 * 1000); // 오늘 날짜에 7일(밀리초)을 더한다.
+		Date now = new Date(nextWeekTime);
+		Date before = new Date(nextWeekTime);
+		Date after = new Date(nextWeekTime+timeScale);
+		
+		scrollchartpane = new JScrollPane();
+		scrollchartpane.setBounds(12, 10, 1497, 583);
+		panel.add(scrollchartpane);
+	
+		
+		TaskSeriesCollection taskGroup = dao.readTask(before,after);
 		
 		System.out.println(taskGroup.getSeries(0).getItemCount());
 		
@@ -95,12 +116,11 @@ public class GanttChartView extends JFrame {
 		caseSet.getDomainAxis().setTickLabelFont(mainfont);
 		caseSet.getRangeAxis().setLabelFont(mainfont);
 		caseSet.getRangeAxis().setTickLabelFont(mainfont);
+		caseSet.getDomainAxis().setMaximumCategoryLabelWidthRatio(50);
+		caseSet.getDomainAxis().setLowerMargin(0.2);
+		caseSet.getDomainAxis().setUpperMargin(0.2);
 		
-		long timeScale = 7 * 1 * 24 * 60 * 60 * 1000;
-		long nextWeekTime = new Date().getTime() + (7 * moveValue * 24 * 60 * 60 * 1000); // 오늘 날짜에 7일(밀리초)을 더한다.
-		Date now = new Date(nextWeekTime);
-		Date before = new Date(nextWeekTime);
-		Date after = new Date(nextWeekTime+timeScale);
+		
 		
 		System.out.println(now);
 		System.out.println(after);
@@ -109,7 +129,7 @@ public class GanttChartView extends JFrame {
 		axis.setRange(before, after);
 		DateTickUnit unit = new DateTickUnit(DateTickUnit.DAY,1); // DateTickUnit (기간의 간격 조건 = 시간 날짜 등, 간격범위  )
 		axis.setTickUnit(unit); 
-
+		
 		axis.setDateFormatOverride(new SimpleDateFormat("MM-dd"));
 		
 		scrollchartpane.setPreferredSize(new Dimension(800,400));
@@ -130,7 +150,7 @@ public class GanttChartView extends JFrame {
 		setTitle("일정관리 시스템");
 		
 		initialize();
-		refreshChart();
+		refreshChartFirst();
 		
 	}
 	
@@ -139,21 +159,22 @@ public class GanttChartView extends JFrame {
 	 */
 	public void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 824, 701);
+		setBounds(100, 100, 1547, 701);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(SystemColor.window);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		scrollchartpane = new JScrollPane();
-		scrollchartpane.setBounds(12, 81, 774, 528);
-		panel.add(scrollchartpane);
+		
+//		scrollchartpane = new JScrollPane();
+//		scrollchartpane.setBounds(12, 81, 1497, 512);
+//		panel.add(scrollchartpane);
 		
 //		gantt = new TaskSeries("업무 일정 공유표");
 		
@@ -163,6 +184,7 @@ public class GanttChartView extends JFrame {
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		btnAddNewWork = new JButton("새로운 일정 추가");
+		btnAddNewWork.setFont(new Font("D2Coding", Font.PLAIN, 25));
 		btnAddNewWork.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -170,9 +192,21 @@ public class GanttChartView extends JFrame {
 				
 			}
 		});
+		
+		btnBack = new JButton("<");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				handleclickEvent(e);
+				
+			}
+		});
+		btnBack.setFont(new Font("D2Coding", Font.PLAIN, 25));
+		panel_1.add(btnBack);
 		panel_1.add(btnAddNewWork);
 		
 		btnDeleteMyWork = new JButton("일정 삭제");
+		btnDeleteMyWork.setFont(new Font("D2Coding", Font.PLAIN, 25));
 		btnDeleteMyWork.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -182,6 +216,7 @@ public class GanttChartView extends JFrame {
 		panel_1.add(btnDeleteMyWork);
 		
 		btnRefresh = new JButton("새로고침");
+		btnRefresh.setFont(new Font("D2Coding", Font.PLAIN, 25));
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				handleclickEvent(e);
@@ -189,6 +224,16 @@ public class GanttChartView extends JFrame {
 			}
 		});
 		panel_1.add(btnRefresh);
+		
+		btnFront = new JButton(">");
+		btnFront.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			handleclickEvent(e);
+			}
+		});
+		btnFront.setFont(new Font("D2Coding", Font.PLAIN, 25));
+		panel_1.add(btnFront);
 	}
 
 	
@@ -204,12 +249,21 @@ public class GanttChartView extends JFrame {
 			
 		} else if (obj == btnDeleteMyWork) {
 			
-			JOptionPane.showInputDialog("삭제할 ");
+			GanttChartDelete.showMyDeleteChart();
 			
 		} else if ( obj == btnRefresh) {
 			
 			refreshChart();
 			
+		} else if (obj == btnFront) {
+			
+			moveValue++;
+			refreshChart();
+			
+		} else if (obj == btnBack) {
+			
+			moveValue--;
+			refreshChart();
 		}
 		
 	}

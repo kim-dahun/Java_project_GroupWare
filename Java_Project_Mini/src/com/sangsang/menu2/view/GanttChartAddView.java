@@ -49,7 +49,7 @@ public class GanttChartAddView extends JDialog {
 	private JTextField textEndDay;
 	private LocalDateTime startday;
 	private LocalDateTime endday;
-	private final DateTimeFormatter DATEFMT = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
+	private final DateTimeFormatter DATEFMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private GanttChart newWork = new GanttChart();
 	private JTextField textId;
 	private JTextField textName;
@@ -184,7 +184,17 @@ public class GanttChartAddView extends JDialog {
 		contentPanel.add(dateChooser_1);
 
 		comboEmpno = new JComboBox();
-		comboEmpno.setModel(new DefaultComboBoxModel(combolist));
+		if(!AccountDaoImpl.getInstance().getNowlogin().getId().equals("admin")) {
+			String nowEmpno=AccountDaoImpl.getInstance().getNowlogin().getEmpNo();
+			if(nowEmpno.equals(null)) {
+				JOptionPane.showMessageDialog(this, "아직 사번을 부여받지 못해서 일정관리 사용이 불가능합니다.");
+				return;
+			} 
+			comboEmpno.setModel(new DefaultComboBoxModel(new String[] {nowEmpno}));
+		} else {
+			comboEmpno.setModel(new DefaultComboBoxModel(combolist));
+		}
+		
 		comboEmpno.setSelectedIndex(0);
 		comboEmpno.setBounds(121, 198, 122, 29);
 		contentPanel.add(comboEmpno);
@@ -352,6 +362,13 @@ public class GanttChartAddView extends JDialog {
 			int result = dao.writeSch(newWork);
 
 			JOptionPane.showMessageDialog(this, result + "개의 일정을 추가했습니다.");
+			
+			newWork = new GanttChart();
+			textContent.setText("");
+			textTitle.setText("");
+			textEndDay.setText("");
+			textStratDay.setText("");
+			
 
 		} else if (obj == cancelButton) {
 			dispose();

@@ -17,6 +17,7 @@ import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
 import com.sangsang.account.model.AccountAdmin;
 import com.sangsang.menu.view.LocalMainview;
+import com.sangsang.menu.view.LocalMainview;
 import com.sangsang.menu.view.Mainview;
 
 import javax.swing.JMenu;
@@ -84,7 +85,7 @@ public class AccountLoginUi {
 		Account adminchecker = dao.read(admin.getId());
 		if (adminchecker == null) {
 
-			dao.writeAcc(admin);
+			dao.writeAccAdmin(admin);
 
 		}
 
@@ -280,14 +281,20 @@ public class AccountLoginUi {
 
 					// 일반 유저 페이지 - 새 창 켜지면서 현재창은 종료하고 현재 창의 account 정보 넘겨줌.
 					LocalMainview.showMainMenuFrame(loginacc);
+					dao.setNowLogin(loginacc);
 
 				} else if (loginacc.getId().equals("admin")) {
 
 					// 관리자 페이지
 					Mainview.showMainMenuFrame(loginacc);
+					dao.setNowLogin(loginacc);
 				}
 
 				frame.setVisible(false);
+				textID.setText("");
+				textPW.setText("");
+				
+				
 				return;
 
 			}

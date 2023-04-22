@@ -1,5 +1,7 @@
 package com.sangsang.menu.controller;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.jfree.data.gantt.Task;
@@ -21,7 +23,7 @@ public interface GanttChartDao {
 	
 	List<GanttChart> read(); // 전체 일정 리스트
 	
-	TaskSeriesCollection readTask(); // 사원의 전체 일정 리스트
+	TaskSeriesCollection readTask(Date before, Date after); // 사원의 전체 일정 리스트
 	
 	GanttChart read(String search); // 특정 사원의 일정 검색.
 	

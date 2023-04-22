@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.menu.controller.PaymentDaoImpl;
 import com.sangsang.menu.model.PaymentContent;
 
@@ -509,7 +510,14 @@ public class PaymentPrintView extends JFrame {
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 
 		comboEmpno = new JComboBox();
-		comboEmpno.setModel(new DefaultComboBoxModel(combolist));
+		if (!AccountDaoImpl.getInstance().getNowlogin().getId().equals("admin")) {
+			String Empno = AccountDaoImpl.getInstance().getNowlogin().getEmpNo();
+			comboEmpno.setModel(new DefaultComboBoxModel(new String[] { Empno }));
+
+		} else {
+			comboEmpno.setModel(new DefaultComboBoxModel(combolist));
+		}
+
 		panel_1.add(comboEmpno);
 
 		comboPayment = new JComboBox();
@@ -538,8 +546,8 @@ public class PaymentPrintView extends JFrame {
 		btnPrintAll = new JButton("귀속연월 전체 출력");
 		btnPrintAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-			handleClickEvent(e);
+
+				handleClickEvent(e);
 			}
 		});
 		panel_1.add(btnPrintAll);
@@ -600,7 +608,7 @@ public class PaymentPrintView extends JFrame {
 		textDdcRs.setText(pay.getDeductionsReason() + "");
 		textdeptname.setText(pay.getDeptName() + "");
 		textEmpIns.setText(tax[4] + "");
-		textIncome.setText(tax[0]+"");
+		textIncome.setText(tax[0] + "");
 		textempno.setText(pay.getEmpno() + "");
 		textHeal.setText(tax[2] + "");
 		textname.setText(pay.getName() + "");
@@ -635,14 +643,65 @@ public class PaymentPrintView extends JFrame {
 
 		PrinterJob job = null;
 		List<Printable> printables = new ArrayList<>();
+
+		if (!AccountDaoImpl.getInstance().getNowlogin().getId().equals("admin")) {
+			for (int i = 0; i < combolist2.length; i++) {
+
+				pay = dao.search(comboEmpno.getSelectedItem().toString() , combolist2[i]);
+				System.out.println(pay.getName());
+				setpay();
+				// Printable 객체 생성
+				job = PrinterJob.getPrinterJob();
+				JOptionPane.showMessageDialog(this,
+						pay.getDeptName() + "의 " + pay.getName() + " " + pay.getPosName() + " 님의 명세서입니다.", "명세서 확인",
+						JOptionPane.CLOSED_OPTION);
+				PageFormat pageFormat = job.defaultPage();
+				pageFormat.setOrientation(PageFormat.PORTRAIT);
+				pageFormat.setPaper(getPaper());
+				Printable printable = new Printable() {
+					@Override
+					public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
+						if (pageIndex > 0) {
+							return NO_SUCH_PAGE;
+						}
+
+						Graphics2D g2d = (Graphics2D) graphics;
+						g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+						// 패널 크기를 A4 용지 크기에 맞게 조정하여 그리기
+						double scaleX = pageFormat.getImageableWidth() / panel.getWidth();
+						double scaleY = pageFormat.getImageableHeight() / panel.getHeight();
+						g2d.scale(scaleX, scaleY);
+						panel.paint(g2d);
+
+						return PAGE_EXISTS;
+					}
+				};
+				printables.add(printable);
+				job.setPrintable(printables.get(i));
+				if (job.printDialog()) {
+					try {
+						job.print();
+					} catch (PrinterException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+			return;
+		}
+		
+		
+		
 		for (int i = 0; i < combolist.length; i++) {
-			
+
 			pay = dao.search(combolist[i], comboPayment.getSelectedItem().toString());
 			System.out.println(pay.getName());
 			setpay();
 			// Printable 객체 생성
 			job = PrinterJob.getPrinterJob();
-			JOptionPane.showMessageDialog(this, pay.getDeptName()+"의 "+pay.getName() + " " + pay.getPosName() +" 님의 명세서입니다.", "명세서 확인", JOptionPane.CLOSED_OPTION);
+			JOptionPane.showMessageDialog(this,
+					pay.getDeptName() + "의 " + pay.getName() + " " + pay.getPosName() + " 님의 명세서입니다.", "명세서 확인",
+					JOptionPane.CLOSED_OPTION);
 			PageFormat pageFormat = job.defaultPage();
 			pageFormat.setOrientation(PageFormat.PORTRAIT);
 			pageFormat.setPaper(getPaper());
@@ -668,16 +727,13 @@ public class PaymentPrintView extends JFrame {
 			printables.add(printable);
 			job.setPrintable(printables.get(i));
 			if (job.printDialog()) {
-			    try {
-			        job.print();
-			    } catch (PrinterException ex) {
-			        ex.printStackTrace();
-			    }
+				try {
+					job.print();
+				} catch (PrinterException ex) {
+					ex.printStackTrace();
+				}
 			}
 		}
-
-		
-		
 
 	}
 

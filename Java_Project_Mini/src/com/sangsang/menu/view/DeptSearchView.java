@@ -143,17 +143,31 @@ public class DeptSearchView extends JDialog {
 
 		} else if (obj == btnSearch) {
 
+			try {
 			int deptno = Integer.parseInt(textdeptno.getText());
 			Department redpart = dao.readOne(deptno);
-			if (redpart == null) {
+			
+			if (redpart == null || textdeptno.getText().isBlank()) {
 				JOptionPane.showMessageDialog(this, "해당 부서번호는 존재하지 않습니다.");
 				return;
 			} else {
-
+				
+				
 				textdeptname.setText(redpart.getDeptName());
 				textdeptref.setText("" + redpart.getDeptNodeNo());
 
 			}
+			
+			}
+			
+			catch(Exception e3) {
+				
+				JOptionPane.showMessageDialog(this, "해당 부서번호는 존재하지 않습니다.");
+				return;
+			
+			}
+			
+			
 
 		}
 

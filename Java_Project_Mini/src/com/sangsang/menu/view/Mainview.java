@@ -46,6 +46,7 @@ public class Mainview {
 	private List<Account> acclist = accdao.read();
 	private Account loginacc;
 	private JLabel lblnowLogin;
+	private JTextArea textArea;
 	
 	/**
 	 * Launch the application.
@@ -63,6 +64,24 @@ public class Mainview {
 		});
 	}
 
+	public void setTextDept() {
+		
+		String dept = loginacc.getDeptName();
+		textArea.setText(loginacc.getDeptName());
+		textArea.setText("\n");
+		for(int i = 0 ; i<acclist.size() ; i++) {
+			
+			if(dept.equals(acclist.get(i).getDeptName())){
+				
+				textArea.setText(acclist.get(i).getEmpNo() + " / " + acclist.get(i).getName());
+				textArea.setText("\n");
+				
+			}
+			
+			
+		}
+		
+	}
 	
 	
 	/**
@@ -71,6 +90,7 @@ public class Mainview {
 	public Mainview(Account acc) {
 		this.loginacc = acc;
 		initialize();
+		setTextDept();
 		
 	}
 
@@ -89,7 +109,7 @@ public class Mainview {
 		scrollPane.setBounds(12, 10, 203, 389);
 		frame.getContentPane().add(scrollPane);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setText("조직도 자리\n");
 		scrollPane.setViewportView(textArea);
@@ -155,7 +175,7 @@ public class Mainview {
 		btnempad.setBounds(438, 63, 145, 39);
 		panel.add(btnempad);
 		
-		JButton btnpost = new JButton("로그인 화면");
+		JButton btnpost = new JButton("로그아웃");
 		btnpost.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

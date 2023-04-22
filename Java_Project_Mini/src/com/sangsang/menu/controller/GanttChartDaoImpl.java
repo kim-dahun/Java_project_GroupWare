@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.sangsang.account.model.Account.Entity.*;
@@ -115,17 +116,28 @@ public class GanttChartDaoImpl implements GanttChartDao {
 	}
 
 	@Override
-	public TaskSeriesCollection readTask() {
+	public TaskSeriesCollection readTask(Date before,Date after) {
 		Task task = null;
 		chartlist = read();
 		TaskSeries tasks = new TaskSeries("일정");
 		TaskSeriesCollection taskGroup = new TaskSeriesCollection();
 		for (GanttChart x : chartlist) {
 
+			
+			
 			Timestamp start = Timestamp.valueOf(x.getStartDay());
 			Timestamp endtime = Timestamp.valueOf(x.getEndDay());
-			task = new Task(x.getEmpno() + "/" + x.getName() + "/" + x.getTitle(), start, endtime);
-			tasks.add(task);
+			
+			
+			
+			if(endtime.compareTo(before)<0 || start.compareTo(after)>0) {
+			
+				
+			} else {
+				task = new Task(x.getEmpno() +"/"+x.getName()+"/"+x.getTitle(), start, endtime);
+				tasks.add(task);
+			}
+			
 		}
 
 		taskGroup.add(tasks);

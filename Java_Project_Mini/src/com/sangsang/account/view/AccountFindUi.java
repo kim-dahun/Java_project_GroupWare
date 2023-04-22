@@ -178,7 +178,7 @@ public class AccountFindUi extends JFrame {
 			String answer = dao.findId(textName.getText(), textempno.getText());
 
 			// 아이디가 없으면 팝업 표출
-			if (answer == null) {
+			if (answer.isBlank()) {
 
 				JOptionPane.showMessageDialog(this, "일치하는 정보가 없습니다.");
 				return;
@@ -196,7 +196,7 @@ public class AccountFindUi extends JFrame {
 			String answer = dao.findPw(textID.getText(), textEmail.getText());
 			
 			// 해당 하는 비밀번호 없으면 팝업 표시
-			if (answer == null) {
+			if (answer.isBlank()) {
 
 				JOptionPane.showMessageDialog(this, "일치하는 정보가 없습니다.");
 				return;

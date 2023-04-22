@@ -18,25 +18,37 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 
 import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
+import com.sangsang.account.view.AccountLoginUi;
+import com.sangsang.menu.model.PaymentContent;
+import com.sangsang.menu2.view.EmployeeView;
+import com.sangsang.menu2.view.GanttChartView;
+import com.sangsang.menu2.view.PaymentContentView;
+import com.sangsang.menu2.view.PaymentPrintView;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class LocalMainview {
 
 	private JFrame frame;
-	private JTextField textField;
-	private Account loginacc;
 	
 	private AccountDaoImpl accdao = AccountDaoImpl.getInstance();
 	private List<Account> acclist = accdao.read();
+	private Account loginacc;
+	private JLabel lblnowLogin;
+	private JTextArea textArea;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -53,14 +65,34 @@ public class LocalMainview {
 		});
 	}
 
+	public void setTextDept() {
+		
+		String dept = loginacc.getDeptName();
+		textArea.setText(loginacc.getDeptName());
+		textArea.setText("\n");
+		for(int i = 0 ; i<acclist.size() ; i++) {
+			
+			if(dept.equals(acclist.get(i).getDeptName())){
+				
+				textArea.setText(acclist.get(i).getEmpNo() + " / " + acclist.get(i).getName());
+				textArea.setText("\n");
+				
+			}
+			
+			
+		}
+		
+	}
 	
 	
 	/**
 	 * Create the application.
 	 */
 	public LocalMainview(Account acc) {
-		initialize();
 		this.loginacc = acc;
+		initialize();
+		setTextDept();
+		
 	}
 
 	/**
@@ -68,88 +100,83 @@ public class LocalMainview {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("일반 사용자 페이지");
+		frame.getContentPane().setBackground(Color.BLACK);
+		frame.setTitle("일반유저 페이지");
 		frame.setBounds(100, 100, 850, 448);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane, BorderLayout.WEST);
+		scrollPane.setBounds(12, 10, 203, 389);
+		frame.getContentPane().add(scrollPane);
 		
-		JTree tree = new JTree();
-		tree.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setText("조직도 자리\n");
+		scrollPane.setViewportView(textArea);
+		
+		TreeNode ceo = new DefaultMutableTreeNode("a");
+		DefaultTreeModel dtree = new DefaultTreeModel(ceo);
+		TreeNode node_1 = new DefaultMutableTreeNode("b");
+				TreeNode node_2 = new DefaultMutableTreeNode("c");
+		
+		lblnowLogin = new JLabel(loginacc.toString());
+		lblnowLogin.setForeground(Color.WHITE);
+		lblnowLogin.setBackground(Color.WHITE);
+		lblnowLogin.setFont(new Font("D2Coding", Font.BOLD, 15));
+		lblnowLogin.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblnowLogin.setBounds(227, 16, 595, 22);
+		frame.getContentPane().add(lblnowLogin);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(227, 135, 595, 264);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("일반 유저 메뉴");
+		lblNewLabel.setFont(new Font("D2Coding", Font.PLAIN, 20));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(12, 24, 571, 29);
+		panel.add(lblNewLabel);
+		
+		JButton btnpost = new JButton("로그아웃");
+		btnpost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				
+				AccountLoginUi.getFrame().setVisible(true);
+				frame.dispose();
+				//TODO
 				
-				clickhandleEvent(e);
 				
 			}
 		});
+		btnpost.setFont(new Font("D2Coding", Font.PLAIN, 20));
+		btnpost.setBounds(12, 115, 145, 39);
+		panel.add(btnpost);
 		
-		
-		
-		
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
-				{
-					DefaultMutableTreeNode node_1;
-					DefaultMutableTreeNode node_2;
-					node_1 = new DefaultMutableTreeNode("colors");
-						node_2 = new DefaultMutableTreeNode("blue");
-							node_2.add(new DefaultMutableTreeNode("violet"));
-							node_2.add(new DefaultMutableTreeNode("red"));
-							node_2.add(new DefaultMutableTreeNode("yellow"));
-						node_1.add(node_2);
-						node_2 = new DefaultMutableTreeNode("white");
-							node_2.add(new DefaultMutableTreeNode("da"));
-						node_1.add(node_2);
-						node_2 = new DefaultMutableTreeNode("green");
-							node_2.add(new DefaultMutableTreeNode("bl"));
-						node_1.add(node_2);
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("sports");
-						node_2 = new DefaultMutableTreeNode("basketball");
-							node_2.add(new DefaultMutableTreeNode("soccer"));
-							node_2.add(new DefaultMutableTreeNode("football"));
-							node_2.add(new DefaultMutableTreeNode("hockey"));
-						node_1.add(node_2);
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("food");
-						node_2 = new DefaultMutableTreeNode("hot dogs");
-							node_2.add(new DefaultMutableTreeNode("pizza"));
-							node_2.add(new DefaultMutableTreeNode("ravioli"));
-							node_2.add(new DefaultMutableTreeNode("bananas"));
-						node_1.add(node_2);
-					add(node_1);
-				}
+		JButton btnCal = new JButton("일정 관리");
+		btnCal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				GanttChartView.showMyGanttChartMain();
+				
 			}
-		));
-		scrollPane.setViewportView(tree);
+		});
+		btnCal.setFont(new Font("D2Coding", Font.PLAIN, 20));
+		btnCal.setBounds(225, 115, 145, 39);
+		panel.add(btnCal);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		textField.setText("기업 조직도");
-		scrollPane.setColumnHeaderView(textField);
-		textField.setColumns(10);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		
-		JLabel lblnowLogin = new JLabel(loginacc.toString());
-		lblnowLogin.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblnowLogin.setFont(new Font("D2Coding", Font.PLAIN, 15));
-		lblnowLogin.setBounds(148, 10, 595, 22);
-		panel.add(lblnowLogin);
-	}
-
-
-
-	protected void clickhandleEvent(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-		
+		JButton btnSal = new JButton("급여 확인");
+		btnSal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				PaymentPrintView.showMyprintpreview();
+				
+			}
+		});
+		btnSal.setFont(new Font("D2Coding", Font.PLAIN, 20));
+		btnSal.setBounds(438, 115, 145, 39);
+		panel.add(btnSal);
 	}
 }
