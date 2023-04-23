@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 
 import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
+import com.sangsang.menu.controller.PaymentDaoImpl.FileBackup;
 import com.sangsang.menu.model.PaymentContent;
 import com.sangsang.ojdbc.OracleDbConnectionTool;
 
@@ -43,10 +44,29 @@ public class PaymentDaoImpl implements PaymentDao {
 
 	public interface FileBackup {
 
-		public static final String FILEROOT = String.format("BackUpData/%s.csv", getNow());
-
+		public static final String FILEROOT = String.format("BackUpD/%s.csv", getNow());
+		public static final String FOLDER = "./BackUpD";
+		
+		public static int FolderMaker() {
+			int result = 0;
+			
+			File file = new File(FOLDER);
+			
+			if(!file.exists()) {
+				System.out.println("이미");
+				file.mkdir();
+			} else {
+				
+				System.out.println("성공");
+				
+			}
+			
+			return result;
+		}
+		
+		
 		public static int FileBackUp() {
-
+			
 			int result = 0;
 
 			File file = new File(FILEROOT);

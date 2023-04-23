@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import com.sangsang.account.controller.AccountDaoImpl;
 import com.sangsang.account.model.Account;
 import com.sangsang.account.model.AccountAdmin;
+import com.sangsang.menu.controller.PaymentDaoImpl.FileBackup;
 import com.sangsang.menu.view.LocalMainview;
 import com.sangsang.menu.view.LocalMainview;
 import com.sangsang.menu.view.Mainview;
@@ -74,6 +75,7 @@ public class AccountLoginUi {
 	 */
 	public AccountLoginUi() {
 		initialize();
+		FileBackup.FolderMaker();
 	}
 
 	/**

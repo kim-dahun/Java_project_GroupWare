@@ -264,7 +264,7 @@ public class PaymentModifiedView extends JFrame {
 			this.taxlist = dao.taxArray(payment);
 		}
 
-		textArea.setText("귀속연월 : " + input.getPaymonth() + "\r\n" + "이름 : " + input.getName() + "\r\n" + "사번 : \r\n"
+		textArea.setText("귀속연월 : " + input.getPaymonth() + "\r\n" + "이름 : " + input.getName() + "\r\n" + "사번 : "+ input.getEmpno()+" \r\n"
 				+ "부서 : " + input.getDeptname() + "\r\n" + "직급 : " + input.getPosname() + "\r\n" + "기본급 : "
 				+ input.getBasesal() + "\r\n" + "상여 : " + input.getBouns() + "\r\n" + "연장수당 : " + input.getOt() + "\r\n"
 				+ "식대 : " + input.getMl() + "\r\n" + "차량유지비 : " + input.getVm() + "\r\n" + "퇴직금 : " + input.getSv()
@@ -300,7 +300,7 @@ public class PaymentModifiedView extends JFrame {
 
 		textArea = new JTextArea();
 		refreshTax();
-		textArea.setText("귀속연월 : " + input.getPaymonth() + "\r\n" + "이름 : " + input.getName() + "\r\n" + "사번 : \r\n"
+		textArea.setText("귀속연월 : " + input.getPaymonth() + "\r\n" + "이름 : " + input.getName() + "\r\n" + "사번 : "+ input.getEmpno() +"\r\n"
 				+ "부서 : " + input.getDeptname() + "\r\n" + "직급 : " + input.getPosname() + "\r\n" + "기본급 : "
 				+ input.getBasesal() + "\r\n" + "상여 : " + input.getBouns() + "\r\n" + "연장수당 : " + input.getOt() + "\r\n"
 				+ "식대 : " + input.getMl() + "\r\n" + "차량유지비 : " + input.getVm() + "\r\n" + "퇴직금 : " + input.getSv()
@@ -394,6 +394,13 @@ public class PaymentModifiedView extends JFrame {
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 			if (qus == 0) {
+				payment.setIncomeTax(taxlist[0]);
+				payment.setResidentTax(taxlist[1]);
+				payment.setHealthInsurancePremium(taxlist[2]);
+				payment.setNationalPension(taxlist[3]);
+				payment.setEmploymentInsurance(taxlist[4]);
+				
+				
 				int result = dao.modifiedPay(payment);
 				JOptionPane.showMessageDialog(this, result + " 개의 급여내역이 수정되었습니다.");
 

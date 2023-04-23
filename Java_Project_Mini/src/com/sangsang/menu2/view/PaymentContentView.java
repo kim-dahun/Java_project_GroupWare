@@ -96,7 +96,7 @@ public class PaymentContentView extends JFrame {
 		setTitle("급여 관리 시스템");
 
 		initialize();
-
+		
 	}
 
 	/**
